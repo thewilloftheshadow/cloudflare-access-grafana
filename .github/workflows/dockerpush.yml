@@ -1,46 +1,13 @@
-name: Docker
+name: ci
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
-      - master
-
-    # Publish `v1.2.3` tags as releases.
-    tags:
-      - v*
-  # Run tests for any PRs.
-  # pull_request:
-env:
-  # TODO: Change variable to your image's name.
-  IMAGE_NAME: theshadowdev/cloudflare-access-grafana-arm
+      - "master"
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  # test:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - uses: actions/checkout@v2
-
-  #     - name: Run tests
-  #       run: |
-  #         if [ -f docker-compose.test.yml ]; then
-  #           docker-compose --file docker-compose.test.yml build
-  #           docker-compose --file docker-compose.test.yml run sut
-  #         else
-  #           docker build . --file Dockerfile
-  #         fi
-
-  # Push image to GitHub Package Registry.
-  # See also https://docs.docker.com/docker-hub/builds/
-  push:
-    # Ensure test job passes before pushing image.
-    # needs: test
-    if: "!contains(github.event.head_commit.message, 'skip ci')"
+  docker:
     runs-on: ubuntu-latest
-
     steps:
       -
         name: Checkout
@@ -64,8 +31,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: theshadowdev/cloudflare-access-grafana-arm:latest
-
-
-          docker tag image $IMAGE_NAME:$VERSION
-          docker push $IMAGE_NAME:$VERSION
+          tags: theshadowdev/cloudflare-access-grafana:latest
