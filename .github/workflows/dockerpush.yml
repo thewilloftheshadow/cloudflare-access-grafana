@@ -13,7 +13,7 @@ on:
   # pull_request:
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: jorgelbg/cloudflare-access-grafana
+  IMAGE_NAME: theshadowdev/cloudflare-access-grafana-arm
 
 jobs:
   # Run tests.
@@ -48,7 +48,7 @@ jobs:
         run: docker build --build-arg MOD=readonly . --file Dockerfile --tag image
 
       - name: Log into registry
-        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKER_HUB_TOKEN }}" | docker login -u ${{ secrets.DOCKER_HUB_USER }} --password-stdin
 
       - name: Push image
         run: |
