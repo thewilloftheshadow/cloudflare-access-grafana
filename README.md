@@ -1,3 +1,7 @@
+This fork is multi-arch. That's pretty much it.
+Image: `theshadowdev/cloudflare-access-grafana`
+
+
 # cloudflare-access-grafana
 
 ![Docker pulls](https://badgen.net/docker/pulls/jorgelbg/cloudflare-access-grafana?icon=docker&color=purple)
@@ -49,7 +53,7 @@ the required values. Now you can run the cloudflare-access-grafana container wit
 
 ```
 $ cp .env.template .env
-$ docker run --rm -d --env-file $(pwd)/.env --name cloudflare-proxy -p 3001:3001 jorgelbg/cloudflare-access-grafana
+$ docker run --rm -d --env-file $(pwd)/.env --name cloudflare-proxy -p 3001:3001 theshadowdev/cloudflare-access-grafana
 ```
 
 This will start the proxy on the specified address and it will start to listen for incoming requests.
